@@ -24,19 +24,21 @@ public class ControlSun : MonoBehaviour
     void Update()
     {
         //the sun & moon will rotate               
-        Sun.transform.Rotate(sunRotationSpeed_x*Time.deltaTime, sunRotationSpeed_y*Time.deltaTime,0);
-        Moon.transform.Rotate(sunRotationSpeed_x*Time.deltaTime, sunRotationSpeed_y*Time.deltaTime,0);
+        Sun.transform.Rotate(sunRotationSpeed_x*Time.deltaTime, 0,0);
+        Moon.transform.Rotate(sunRotationSpeed_x*Time.deltaTime, 0,0);
         //know when they have dipped beyond the horizon to set the other active; 
        
+       // Debug.Log(Moon.transform.rotation.eulerAngles.x);
         
-        if (Sun.transform.rotation.x <-100)
+        
+        if (Sun.transform.rotation.eulerAngles.x > 340 )
         {
             turnOnMoon();
         }
         
-        if (Moon.transform.rotation.x > 70)
+        if (Moon.transform.rotation.eulerAngles.x > 340)
         {
-            Debug.Log("Moon should set");
+            turnOnSun();
         }
 
     }
@@ -49,6 +51,7 @@ public class ControlSun : MonoBehaviour
 
     void turnOnSun()
     {
-        Sun.SetActive(false);
+        Sun.SetActive(true);
+        Moon.SetActive(false);
     }
 }
