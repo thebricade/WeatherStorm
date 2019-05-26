@@ -29,7 +29,7 @@ public class ControlSun : MonoBehaviour
         //know when they have dipped beyond the horizon to set the other active; 
        
         
-        if (Sun.transform.rotation.x> -7)
+        if (Sun.transform.rotation.x <-100)
         {
             turnOnMoon();
         }
@@ -43,7 +43,8 @@ public class ControlSun : MonoBehaviour
 
     void turnOnMoon()
     {
-      
+        Sun.SetActive(false);
+        Moon.SetActive(true);
     }
 
     void turnOnSun()
