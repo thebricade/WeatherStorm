@@ -1,24 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
-public class BasicPlanting : MonoBehaviour
+
+public class BasicPlanting : MonoBehaviour 
 {
     //public GameObject Ground;
+    public Rigidbody Body { get; private set; }
+
 
     private Vector3 craftTargetVector;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Vector3 flowerLocation;
+    public GameObject craftedObject;
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
+    public Plants[] plantPrefabs;
+
+
 
     private void OnMouseDown()
     {
@@ -31,7 +31,18 @@ public class BasicPlanting : MonoBehaviour
             craftTargetVector = raycastHit.point; 
         }
 
-        GameObject newPlant = Instantiate(Resources.Load<GameObject>("Prefabs/Plant"), craftTargetVector,
-            Quaternion.identity);
+        Plants prefab = plantPrefabs[Random.Range(0, plantPrefabs.Length)];
+        Plants spawn = prefab.GetPooledInstance<Plants>();
+
+        spawn.transform.position = craftTargetVector;
+
+        // GameObject newPlant = Instantiate(Resources.Load<GameObject>("Prefabs/Plant"), craftTargetVector,
+        //Quaternion.identity, craftedObject.transform);
+
+
     }
+    
+    //create function to ReturnToPool();
+
+
 }
