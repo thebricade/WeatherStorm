@@ -190,6 +190,7 @@
         <e p="Scripts" t="Include">
           <e p="BasicPlanting.cs" t="Include" />
           <e p="ControlSun.cs" t="Include" />
+          <e p="InventoryManager.cs" t="Include" />
           <e p="ObjectPool.cs" t="Include" />
           <e p="PlantGrowing.cs" t="Include" />
           <e p="PlantHarvesting.cs" t="Include" />

@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlantGrowing : PooledObjects
 {
     private Vector3 initialPlantPosition;
-    private GameObject craftedObject;
+    private GameObject inventoryManager;
+    public int harvestPlant;
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        craftedObject =GameObject.Find("Crafted");
+        inventoryManager =GameObject.Find("InventoryManager");
         StartCoroutine(GrowingTime());
     }
 
@@ -29,6 +31,8 @@ public class PlantGrowing : PooledObjects
 
     private void OnMouseDown()
     {
+        inventoryManager.GetComponent<InventoryManager>().GrowPlant();
         ReturnToPool();
+        
     }
 }

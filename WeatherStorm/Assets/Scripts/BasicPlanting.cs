@@ -15,8 +15,9 @@ public class BasicPlanting : MonoBehaviour
     private Vector3 craftTargetVector;
     private Vector3 flowerLocation;
     public GameObject craftedObject;
-
-    public Plants[] plantPrefabs;
+    
+    [SerializeField]
+    public  PlantGrowing[] plantPrefabs;
 
 
 
@@ -31,8 +32,8 @@ public class BasicPlanting : MonoBehaviour
             craftTargetVector = raycastHit.point; 
         }
 
-        Plants prefab = plantPrefabs[Random.Range(0, plantPrefabs.Length)];
-        Plants spawn = prefab.GetPooledInstance<Plants>();
+        PlantGrowing prefab = plantPrefabs[Random.Range(0, plantPrefabs.Length)];
+        PlantGrowing spawn = prefab.GetPooledInstance<PlantGrowing>();
 
         spawn.transform.position = craftTargetVector;
 
