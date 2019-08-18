@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Graphing;
 using UnityEngine;
 
 public class PlantGrowing : PooledObjects
@@ -31,7 +32,9 @@ public class PlantGrowing : PooledObjects
 
     private void OnMouseDown()
     {
-        inventoryManager.GetComponent<InventoryManager>().GrowPlant();
+        inventoryManager.GetComponent<InventoryManager>().HavestPlant();
+       // harvestPlant = gameObject.GetComponents<PooledObject<ObjectPool>>().Length; 
+        //print("Number from pooled object??? "+ harvestPlant);
         ReturnToPool();
         
     }

@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
 {
     private PooledObjects thePooledObjects;
 
-    List<PooledObjects> availableObjects = new List<PooledObjects>();
+    public List<PooledObjects> availableObjects = new List<PooledObjects>();
 
     public static ObjectPool GetPool(PooledObjects prefab)
     {

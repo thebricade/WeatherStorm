@@ -14,28 +14,41 @@ public class BasicPlanting : MonoBehaviour
 
     private Vector3 craftTargetVector;
     private Vector3 flowerLocation;
-    public GameObject craftedObject;
+    private GameObject inventoryManager;
+    private int plantSeeds;
     
-    [SerializeField]
     public  PlantGrowing[] plantPrefabs;
 
-
+    void Start()
+    {
+        inventoryManager =GameObject.Find("InventoryManager");
+        
+    }
 
     private void OnMouseDown()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        RaycastHit raycastHit = new RaycastHit();
-
-        if (Physics.Raycast(ray, out raycastHit))
+        //find out how many seeds are available 
+        plantSeeds = inventoryManager.GetComponent<InventoryManager>().plantHarvested;
+        if (plantSeeds >= 1)
         {
-            craftTargetVector = raycastHit.point; 
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit raycastHit = new RaycastHit();
+
+            if (Physics.Raycast(ray, out raycastHit))
+            {
+                craftTargetVector = raycastHit.point;
+            }
+
+            if (plantPrefabs.Length >= 0)
+            {
+                PlantGrowing prefab = plantPrefabs[Random.Range(0, plantPrefabs.Length)];
+                PlantGrowing spawn = prefab.GetPooledInstance<PlantGrowing>();
+
+                spawn.transform.position = craftTargetVector;
+            }
+            inventoryManager.GetComponent<InventoryManager>().PlantSeeds();
         }
-
-        PlantGrowing prefab = plantPrefabs[Random.Range(0, plantPrefabs.Length)];
-        PlantGrowing spawn = prefab.GetPooledInstance<PlantGrowing>();
-
-        spawn.transform.position = craftTargetVector;
 
         // GameObject newPlant = Instantiate(Resources.Load<GameObject>("Prefabs/Plant"), craftTargetVector,
         //Quaternion.identity, craftedObject.transform);
